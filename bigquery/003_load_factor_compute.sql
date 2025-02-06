@@ -1,0 +1,43 @@
+-- SELECT
+--   YEAR,
+--   QUARTER,
+--   AVG(SAFE_DIVIDE(DB1B_PASSENGERS, T100_SEATS)) AS avg_load_factor,
+--   SUM(DB1B_PASSENGERS) AS total_passengers,
+--   SUM(T100_SEATS) AS total_seats
+-- FROM `aviation-analysis.aviation_data_2010_2024.raw_data`
+-- WHERE YEAR BETWEEN 2019 AND 2023
+-- GROUP BY YEAR, QUARTER
+-- ORDER BY YEAR, QUARTER;
+
+-- SELECT
+--   REGION,
+--   YEAR,
+--   QUARTER,
+--   AVG(SAFE_DIVIDE(DB1B_PASSENGERS, T100_SEATS)) AS avg_load_factor,
+--   SUM(DB1B_PASSENGERS) AS total_passengers,
+--   SUM(T100_SEATS) AS total_seats
+-- FROM `aviation-analysis.aviation_data_2010_2024.raw_data`
+-- WHERE YEAR BETWEEN 2019 AND 2023
+--   AND T100_SEATS > 0 -- to avoid division by zero
+-- GROUP BY REGION, YEAR, QUARTER
+-- ORDER BY REGION, YEAR, QUARTER;
+
+
+SELECT
+  REGION,
+  YEAR,
+  QUARTER,
+  ROUTE_KEY,
+  CARRIER,
+  CARRIER_NAME,
+  T100_SEATS,
+  DB1B_PASSENGERS,
+  SAFE_DIVIDE(DB1B_PASSENGERS, T100_SEATS) AS LOAD_FACTOR
+FROM `aviation-analysis.aviation_data_2010_2024.raw_data`
+WHERE 
+  YEAR BETWEEN 2019 AND 2023
+  AND T100_SEATS > 0
+  AND REGION = 'D' -- Only domestic flights
+  AND DB1B_PASSENGERS IS NOT NULL
+ORDER BY 
+  YEAR, QUARTER;
