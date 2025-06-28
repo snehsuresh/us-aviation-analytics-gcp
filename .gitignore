@@ -1,0 +1,73 @@
+# Byte-compiled / cache / virtual envs
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg-info/
+*.egg
+*.log
+*.tmp
+*.bak
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+myenv*/
+pip-wheel-metadata/
+
+# Notebooks checkpoints
+.ipynb_checkpoints
+
+# MacOS metadata
+.DS_Store
+
+# Jupyter runtime
+*.nbconvert.ipynb
+profile_default/
+*.nbstripout
+.jupyter/
+
+# Plots and generated figures
+*.png
+*.svg
+*.pdf
+*.jpg
+*.jpeg
+
+# Data files
+data/raw/
+data/processed/bigquery_output/*.csv
+data/processed/databricks_output/*.csv
+data/processed/*.csv
+data/processed/*.xlsx
+quarterly_negative_sentiment.csv
+
+# GCP/Databricks secrets
+*.json
+gcp_config/*.json
+aviation-analysis-*.json
+
+# Build artifacts
+build/
+dist/
+*.spec
+
+# VSCode / PyCharm / JetBrains
+.vscode/
+.idea/
+*.iml
+
+# OS-level junk
+Thumbs.db
+ehthumbs.db
+Icon?
+
+# Ignore cloud-run cache or auth
+gcloud_auth.sh
+cloud_run/__pycache__/
+data/aviation_research_full_analysis.xlsx
+data/processed/databricks_output/mismatch_summary.xlsx

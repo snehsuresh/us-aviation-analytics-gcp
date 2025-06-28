@@ -1,6 +1,6 @@
 # ✈️ U.S. Aviation Analytics (2010 – 2024)
 
-> **Cloud-scale, policy-driven data project** using BigQuery, Databricks (PySpark | Scala) and Python econometrics to uncover supply–demand mismatches, CARES Act impacts, rural-airport equity, ULCC market dynamics, and sentiment-driven strategy.
+> **Policy-driven data project** using BigQuery, Databricks (PySpark | Scala) and Python econometrics to uncover supply–demand mismatches, CARES Act impacts, rural-airport equity, ULCC market dynamics, and sentiment-driven strategy.
 
 ---
 
@@ -20,20 +20,9 @@
 
 ## Project Architecture
 
-```text
-GCS  →  BigQuery SQL  →  Databricks (PySpark | Scala) →  GCS  ↔  BigQuery  →  Python Notebooks  →  BI Dashboard
-Raw ingest (~20 GB) to Google Cloud Storage
+![Architecture Diagram](plots/architecture.png)
 
-ETL & feature engineering in BigQuery (001_…-005_*.sql)
-
-Union + heavy aggregation on Databricks auto-scaling cluster (mismatch_analysis.scala)
-
-Econometrics & viz in Jupyter/Vertex AI (*.ipynb)
-
-Optional Cloud Run API (cloud_run/) for serving metrics
-
-(Add plots/architecture_diagram.png – see screenshot list)
-```
+````
 
 ## Folder Layout
 
@@ -54,7 +43,7 @@ Optional Cloud Run API (cloud_run/) for serving metrics
 │   └── viz/                  # Matplotlib / seaborn helpers
 ├── sentiment_analysis/       # Dow Jones news pipeline
 └── requirements.txt
-```
+````
 
 ## Quick Start
 
@@ -78,21 +67,21 @@ jupyter lab notebooks/
 
 | Dataset | Years | Size | Notes |
 | --- | --- | --- | --- |
-| DOT T-100 Domestic Segment | 2010-2024 Q1-Q4 | 18 GB | Seat-level capacity |
+| DOT T-100 Domestic Segment | 2010-2024 Q1-Q4 | 1 GB | Seat-level capacity |
 | DB1B 10 % Ticket Sample | 2010-2024 Q1-Q4 | 1.9 GB | Passenger & fare |
 | ARP NPIAS 2025-2029 Appendix A | 2024 release | 5 MB | Airport classes |
-| Dow Jones Factiva Aviation News | 2000-2024 | 6.6 M lines | Sentiment shocks |
+| Dow Jones Factiva Aviation News (~ 7 Million articles) | 2000-2024 | 20GB lines | Sentiment shocks |
 
 ## Analytical Modules
 
-| # | Notebook | SQL / PySpark | Business Question |
-| --- | --- | --- | --- |
-| 1 | mismatch_anaylsis.ipynb | 002_create_table_mismatch_index.sql, databricks/mismatch_analysis.scala | Do airlines misalign seat supply and demand? |
-| 2 | cares_analysis.ipynb | 003_load_factor_compute.sql | Did the CARES Act restore load factors? |
-| 3 | rural_trend_analysis.ipynb | merge in classification_airports.csv | Are non-hub (rural) airports losing capacity? |
-| 4 | ulcc_legacy_analysis.ipynb | none (in-notebook) | How do ULCCs differ in price & demand? |
-| 5 | fare_elasticity_did.ipynb | 004_create_DiD_table.sql | Causal impact of ULCC entry (DiD)? |
-| 6 | sentiment_vs_defense_dowjones.ipynb | 005_sentiment_shock_summary.sql | Do negative news shocks trigger capacity cuts? |
+| Business Question | Notebook | Tools Used & Source Code |
+| --- | --- | --- |
+| **Do airlines misalign seat supply and demand?** | `mismatch_anaylsis.ipynb` | BigQuery: `002_create_table_mismatch_index.sql`<br>Databricks: `mismatch_analysis.scala` |
+| **Did the CARES Act restore load factors?** | `cares_analysis.ipynb` | BigQuery: `003_load_factor_compute.sql` |
+| **Are non-hub (rural) airports losing capacity?** | `rural_trend_analysis.ipynb` | CSV Join: `classification_airports.csv` |
+| **How do ULCCs differ in price & demand?** | `ulcc_legacy_analysis.ipynb` | In-notebook analysis using pandas/statsmodels |
+| **Causal impact of ULCC entry (DiD)?** | `fare_elasticity_did.ipynb` | BigQuery: `004_create_DiD_table.sql` |
+| **Do negative news shocks trigger capacity cuts?** | `sentiment_vs_defense_dowjones.ipynb` | BigQuery: `005_sentiment_shock_summary.sql` |
 
 See notebooks/ for fully reproducible analysis with inline comments.
 
@@ -112,9 +101,8 @@ See notebooks/ for fully reproducible analysis with inline comments.
 | rural_capacity_line.png | Seat totals by airport class |
 | fare_elasticity_plot.png | Log-log fare vs passengers + regression lines |
 | did_treatment_trend.png | Avg passengers (treated vs control) pre/post ULCC |
-| sentiment_capacity_delta.png | 2-qrtr seat change vs sentiment shock |
+| topicthemes_vs_operations.png | Heatmap with descriptive BERTopic themes |
 | architecture_diagram.png | High-level GCP + Databricks pipeline |
-| databricks_pivot_screenshot.png | Spark groupBy / pivot UI (prove Databricks use) |
 | bigquery_console_query.png | Example completed query in BigQuery UI |
 | dashboard_overview.png | (If you build it) Power BI / Tableau landing page |
 
