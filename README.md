@@ -104,7 +104,6 @@ See notebooks/ for fully reproducible analysis with inline comments.
 | topicthemes_vs_operations.png | Heatmap with descriptive BERTopic themes |
 | architecture_diagram.png | High-level GCP + Databricks pipeline |
 | bigquery_console_query.png | Example completed query in BigQuery UI |
-| dashboard_overview.png | (If you build it) Power BI / Tableau landing page |
 
 ## Results & Strategic Insights
 
