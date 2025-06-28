@@ -70,7 +70,7 @@ jupyter lab notebooks/
 | DOT T-100 Domestic Segment | 2010-2024 Q1-Q4 | 1 GB | Seat-level capacity |
 | DB1B 10 % Ticket Sample | 2010-2024 Q1-Q4 | 1.9 GB | Passenger & fare |
 | ARP NPIAS 2025-2029 Appendix A | 2024 release | 5 MB | Airport classes |
-| Dow Jones Factiva Aviation News (~ 7 Million articles) | 2000-2024 | 20GB | Sentiment shocks |
+| Dow Jones News Archive (~ 7 Million articles/ Purchased) | 2000-2024 | 20GB | Sentiment shocks |
 
 ## Analytical Modules
 
