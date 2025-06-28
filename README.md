@@ -82,6 +82,7 @@ jupyter lab notebooks/
 | **How do ULCCs differ in price & demand?** | `ulcc_legacy_analysis.ipynb` | In-notebook analysis using pandas/statsmodels |
 | **Causal impact of ULCC entry (DiD)?** | `fare_elasticity_did.ipynb` | BigQuery: `004_create_DiD_table.sql` |
 | **Do negative news shocks trigger capacity cuts?** | `sentiment_vs_defense_dowjones.ipynb` | BigQuery: `005_sentiment_shock_summary.sql` |
+| **Which media themes influence airline strategy most?** | `themes_vs_ops.ipynb` | BERTopic, TF-IDF correlation, BigQuery + GCS |
 
 See notebooks/ for fully reproducible analysis with inline comments.
 
